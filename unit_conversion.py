@@ -155,7 +155,7 @@ class Capacity:
     def to_metric(self) -> tuple[float. str]:
         '''Returns a tuple (metric value, label)'''
         if self.unit == "fluid ounce":
-            return float(self.unit * self.FLUID_OUNCE_TO_ML), "milliliters"
+            return float(self.value * self.FLUID_OUNCE_TO_ML), "milliliters"
         elif self.unit == "cup":
             return float(self.value * self.CUP_TO_ML), "milliliters"
         elif self.unit == "liquid pint":
