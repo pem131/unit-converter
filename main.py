@@ -22,7 +22,6 @@ args.unit = " ".join(args.unit)
 # List of conversion classes
 conversion_classes = [uc.Area, uc.Capacity, uc.Distance, uc.Mass, uc.Temperature, uc.Volume]
 
-
 if args.interactive:
     print("Entering interactive mode (type 'quit' to exit)")
     # Create a while loop
@@ -51,10 +50,6 @@ if args.interactive:
             print(e)
             continue
         
-        
-        
-        
-
 elif args.value is not None and args.unit is not None:
     # Single command line usage
     perform_conversion(value=args.value, unit=args.unit, conversion_classes=conversion_classes)
