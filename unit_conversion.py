@@ -33,7 +33,7 @@ class Distance:
                 display_unit = "inches"
             elif self.unit == "foot":
                 display_unit = "feet"
-            elif not self.unit == "feet" and self.unit.endswith("s"):
+            elif not self.unit == "feet" and not self.unit.endswith("s"):
                 display_unit += "s"
         
         # Handle singular/plural for metric
@@ -81,7 +81,7 @@ class Area:
                 display_unit = "square inches"
             elif self.unit == "square foot":
                 display_unit = "square feet"
-            elif not self.unit == "square feet" and self.unit.endswith("s"):
+            elif not self.unit == "square feet" and not self.unit.endswith("s"):
                 display_unit += "s"
         
         if self.value == 1:
@@ -92,7 +92,7 @@ class Area:
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value} {label}"
+        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
 
 class Volume:
     # Conversion constants
@@ -127,7 +127,7 @@ class Volume:
                 display_unit = "cubic inches"
             elif self.unit == "cubic foot":
                 display_unit = "cubic feet"
-            elif not self.unit == "cubic feet" and self.unit.endswith("s"):
+            elif not self.unit == "cubic feet" and not self.unit.endswith("s"):
                 display_unit += "s"
 
         if self.value == 1:
@@ -138,7 +138,7 @@ class Volume:
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value} {label}"
+        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
 
 class Capacity:
     # Conversion constants
@@ -182,7 +182,7 @@ class Capacity:
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value} {label}"
+        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
 
 class Mass:
     # Conversion constants
@@ -216,13 +216,14 @@ class Mass:
         # Handle singular/plural for non-metric
         display_unit = self.unit
         if self.value != 1:
-            display_unit += "s"
+            if not self.unit.endswith("s"):
+                display_unit += "s"
         
         # Handle singular/plural for metric
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value} {label}"
+        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
 
 class Temperature:
     def __init__(self, value: float | int, unit: str = "fahrenheit"):
@@ -232,7 +233,7 @@ class Temperature:
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (metric value, label)'''
         if self.unit == "fahrenheit":
-            return round(float(((self.value - 32) / 1.8) + 273.15), 2), "kelvin"
+            return float(((self.value - 32) / 1.8) + 273.15), 2, "kelvin"
         elif self.unit == "celsius":
             return float(self.value + 273.15), "kelvin"
         else:
@@ -243,4 +244,4 @@ class Temperature:
         # Get the metric value and label
         metric_value, label = self.to_metric()
 
-        return f"{self.value} {self.unit} is {metric_value} {label}"
+        return f"{self.value} {self.unit} is {metric_value:.2f} {label}"
