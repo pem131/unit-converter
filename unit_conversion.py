@@ -10,7 +10,7 @@ class Distance:
         self.unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float, str]:
-        '''Returns a tuple (metric value, label)'''
+        '''Returns a tuple (value, label)'''
         if self.unit == "inch":
             return float(self.value * self.INCH_TO_CM), "centimeters"
         elif self.unit in ["foot", "feet"]:
@@ -23,7 +23,7 @@ class Distance:
             raise ValueError(f"Unit {self.unit} is not supported.")
     
     def __str__(self) -> str:
-        '''Display the value'''
+        '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
         # Handle singular/plural for non metric
@@ -55,7 +55,7 @@ class Area:
         self.unit = unit.lower().rstrip("s")
 
     def to_metric(self) -> tuple[float, str]:
-        '''Returns a tuple (metric value, label)'''
+        '''Returns a tuple (value, label)'''
         if self.unit == "square inch":
             return float(self.value * self.SQUARE_INCH_TO_SQUARE_CM), "square centimeters"
         elif self.unit in ["square foot", "square feet"]:
@@ -70,7 +70,7 @@ class Area:
             raise ValueError(f"Unit {self.unit} is not supported.")
     
     def __str__(self) -> str:
-        '''Display the value'''
+        '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
 
@@ -105,7 +105,7 @@ class Volume:
         self.unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float, str]:
-        '''Returns a tuple (metric value, label)'''
+        '''Returns a tuple (value, label)'''
         if self.unit == "cubic inch":
             return float(self.value * self.CUBIC_INCH_TO_CUBIC_CM), "cubic centimeters"
         elif self.unit in ["cubic foot", "cubic feet"]:
@@ -116,7 +116,7 @@ class Volume:
             raise ValueError(f"Unit {self.unit} is not supported.")
     
     def __str__(self) -> str:
-        '''Display the value'''
+        '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
 
@@ -153,7 +153,7 @@ class Capacity:
         self.unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float. str]:
-        '''Returns a tuple (metric value, label)'''
+        '''Returns a tuple (value, label)'''
         if self.unit == "fluid ounce":
             return float(self.value * self.FLUID_OUNCE_TO_ML), "milliliters"
         elif self.unit == "cup":
@@ -168,7 +168,7 @@ class Capacity:
             raise ValueError(f"Unit {self.unit} is not supported.")
     
     def __str__(self) -> str:
-        '''Display the value'''
+        '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
 
@@ -196,7 +196,7 @@ class Mass:
         self.unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float, str]:
-        '''Returns a tuple (metric value, label)'''
+        '''Returns a tuple (value, label)'''
         if self.unit == "ounce":
             return float(self.value * self.OUNCE_TO_G), "grams"
         elif self.unit == "pound":
@@ -209,7 +209,7 @@ class Mass:
             raise ValueError(f"Unit {self.unit} is not supported.")
     
     def __str__(self) -> str:
-        '''Display the value'''
+        '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
 
@@ -231,16 +231,16 @@ class Temperature:
         self.unit = unit.lower()
     
     def to_metric(self) -> tuple[float, str]:
-        '''Returns a tuple (metric value, label)'''
+        '''Returns a tuple (value, label)'''
         if self.unit == "fahrenheit":
-            return float(((self.value - 32) / 1.8) + 273.15), 2, "kelvin"
+            return float(((self.value - 32) / 1.8) + 273.15), "kelvin"
         elif self.unit == "celsius":
             return float(self.value + 273.15), "kelvin"
         else:
             raise ValueError(f"Unit {self.unit} is not supported.")
     
     def __str__(self) -> str:
-        '''Display the value'''
+        '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
 

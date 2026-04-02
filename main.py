@@ -1,6 +1,6 @@
 import argparse
 import unit_conversion as uc
-from helper_functions import perform_conversion
+from helper_functions import perform_conversion, print_supported_units
 
 # Instantiate a parser
 parser = argparse.ArgumentParser(description="A command line tool to convert US customary units to metric units.\
@@ -10,8 +10,9 @@ parser = argparse.ArgumentParser(description="A command line tool to convert US 
 parser.add_argument("value", type=float, nargs="?", help="The value to be converted")
 parser.add_argument("unit", type=str, nargs="*", help="The unit to be converted")
 
-# Add optional argument
+# Add optional arguments
 parser.add_argument("-i", "--interactive", action="store_true", help="Run the tool in interactive mode")
+parser.add_argument("-s", "--show", action="store_true", help="Show supported conversions")
 
 # Collect arguments
 args = parser.parse_args()
@@ -49,6 +50,9 @@ if args.interactive:
             # Only runs if float conversion fails
             print(e)
             continue
+
+elif args.show:
+    print_supported_units()
         
 elif args.value is not None and args.unit is not None:
     # Single command line usage
