@@ -6,41 +6,41 @@ class Distance:
     MILE_TO_KM = 1.61
 
     def __init__(self, value: float | int, unit: str = "inch"):
-        self.value = value
-        self.unit = unit.lower().rstrip("s")
+        self._value = value
+        self._unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
-        if self.unit == "inch":
-            return float(self.value * self.INCH_TO_CM), "centimeters"
-        elif self.unit in ["foot", "feet"]:
-            return float(self.value * self.FOOT_TO_CM), "centimeters"
-        elif self.unit == "yard":
-            return float(self.value * self.YARD_TO_CM), "centimeters"
-        elif self.unit == "mile":
-            return (self.value * self.MILE_TO_KM), "kilometers"
+        if self._unit == "inch":
+            return float(self._value * self.INCH_TO_CM), "centimeters"
+        elif self._unit in ["foot", "feet"]:
+            return float(self._value * self.FOOT_TO_CM), "centimeters"
+        elif self._unit == "yard":
+            return float(self._value * self.YARD_TO_CM), "centimeters"
+        elif self._unit == "mile":
+            return (self._value * self.MILE_TO_KM), "kilometers"
         else:
-            raise ValueError(f"Unit {self.unit} is not supported.")
+            raise ValueError(f"Unit {self._unit} is not supported.")
     
     def __str__(self) -> str:
         '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
         # Handle singular/plural for non metric
-        display_unit = self.unit
-        if self.value != 1:
-            if self.unit == "inch":
+        display_unit = self._unit
+        if self._value != 1:
+            if self._unit == "inch":
                 display_unit = "inches"
-            elif self.unit == "foot":
+            elif self._unit == "foot":
                 display_unit = "feet"
-            elif not self.unit == "feet" and not self.unit.endswith("s"):
+            elif not self._unit == "feet" and not self._unit.endswith("s"):
                 display_unit += "s"
         
         # Handle singular/plural for metric
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
+        return f"{self._value} {display_unit} is {metric_value:.2f} {label}"
  
 class Area:
     # Coversion constants
@@ -51,23 +51,23 @@ class Area:
     SQUARE_MILE_TO_SQUARE_KM = 2.59
 
     def __init__(self, value: float | int, unit: str ="square inch"):
-        self.value = value
-        self.unit = unit.lower().rstrip("s")
+        self._value = value
+        self._unit = unit.lower().rstrip("s")
 
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
-        if self.unit == "square inch":
-            return float(self.value * self.SQUARE_INCH_TO_SQUARE_CM), "square centimeters"
-        elif self.unit in ["square foot", "square feet"]:
-            return float(self.value * self.SQUARE_FOOT_TO_SQUARE_CM), "square centimeters"
-        elif self.unit == "square yard":
-            return float(self.value * self.SQUARE_YARD_TO_SQUARE_M), "square meters"
-        elif self.unit == "acre":
-            return float(self.value * self.ACRE_TO_SQUARE_M), "square meters"
-        elif self.unit == "square mile":
-            return float(self.value * self.SQUARE_MILE_TO_SQUARE_KM), "square kilometers"
+        if self._unit == "square inch":
+            return float(self._value * self.SQUARE_INCH_TO_SQUARE_CM), "square centimeters"
+        elif self._unit in ["square foot", "square feet"]:
+            return float(self._value * self.SQUARE_FOOT_TO_SQUARE_CM), "square centimeters"
+        elif self._unit == "square yard":
+            return float(self._value * self.SQUARE_YARD_TO_SQUARE_M), "square meters"
+        elif self._unit == "acre":
+            return float(self._value * self.ACRE_TO_SQUARE_M), "square meters"
+        elif self._unit == "square mile":
+            return float(self._value * self.SQUARE_MILE_TO_SQUARE_KM), "square kilometers"
         else:
-            raise ValueError(f"Unit {self.unit} is not supported.")
+            raise ValueError(f"Unit {self._unit} is not supported.")
     
     def __str__(self) -> str:
         '''Display the output'''
@@ -75,24 +75,24 @@ class Area:
         metric_value, label = self.to_metric()
 
         # Handle singular/plural for non-metric
-        display_unit = self.unit
-        if self.value != 1:
-            if self.unit == "square inch":
+        display_unit = self._unit
+        if self._value != 1:
+            if self._unit == "square inch":
                 display_unit = "square inches"
-            elif self.unit == "square foot":
+            elif self._unit == "square foot":
                 display_unit = "square feet"
-            elif not self.unit == "square feet" and not self.unit.endswith("s"):
+            elif not self._unit == "square feet" and not self._unit.endswith("s"):
                 display_unit += "s"
         
-        if self.value == 1:
-            if self.unit == "square feet":
+        if self._value == 1:
+            if self._unit == "square feet":
                 display_unit = "square foot"
         
         # Handle singular/plural for metric
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
+        return f"{self._value} {display_unit} is {metric_value:.2f} {label}"
 
 class Volume:
     # Conversion constants
@@ -101,19 +101,19 @@ class Volume:
     CUBIC_YARD_TO_CUBIC_CM = 0.76
 
     def __init__(self, value: float | int, unit: str = "cubic inch") -> None:
-        self.value = value
-        self.unit = unit.lower().rstrip("s")
+        self._value = value
+        self._unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
-        if self.unit == "cubic inch":
-            return float(self.value * self.CUBIC_INCH_TO_CUBIC_CM), "cubic centimeters"
-        elif self.unit in ["cubic foot", "cubic feet"]:
-            return float(self.value * self.CUBIC_FOOT_TO_CUBIC_CM), "cubic centimeters"
-        elif self.unit == "cubic yard":
-            return float(self.value * self.CUBIC_YARD_TO_CUBIC_CM), "cubic centimeters"
+        if self._unit == "cubic inch":
+            return float(self._value * self.CUBIC_INCH_TO_CUBIC_CM), "cubic centimeters"
+        elif self._unit in ["cubic foot", "cubic feet"]:
+            return float(self._value * self.CUBIC_FOOT_TO_CUBIC_CM), "cubic centimeters"
+        elif self._unit == "cubic yard":
+            return float(self._value * self.CUBIC_YARD_TO_CUBIC_CM), "cubic centimeters"
         else:
-            raise ValueError(f"Unit {self.unit} is not supported.")
+            raise ValueError(f"Unit {self._unit} is not supported.")
     
     def __str__(self) -> str:
         '''Display the output'''
@@ -121,24 +121,24 @@ class Volume:
         metric_value, label = self.to_metric()
 
         # Handle singular/plural for non-metric
-        display_unit = self.unit       
-        if self.value != 1:
-            if self.unit == "cubic inch":
+        display_unit = self._unit       
+        if self._value != 1:
+            if self._unit == "cubic inch":
                 display_unit = "cubic inches"
-            elif self.unit == "cubic foot":
+            elif self._unit == "cubic foot":
                 display_unit = "cubic feet"
-            elif not self.unit == "cubic feet" and not self.unit.endswith("s"):
+            elif not self._unit == "cubic feet" and not self._unit.endswith("s"):
                 display_unit += "s"
 
-        if self.value == 1:
-            if self.unit == "cubic feet":
+        if self._value == 1:
+            if self._unit == "cubic feet":
                 display_unit = "cubic foot"
         
         # Handle singular/plural for metric
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
+        return f"{self._value} {display_unit} is {metric_value:.2f} {label}"
 
 class Capacity:
     # Conversion constants
@@ -149,23 +149,23 @@ class Capacity:
     LIQUID_GALLON_TO_L = 3.76
 
     def __init__(self, value: float | int, unit: str = "fluid ounce"):
-        self.value = value
-        self.unit = unit.lower().rstrip("s")
+        self._value = value
+        self._unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float. str]:
         '''Returns a tuple (value, label)'''
-        if self.unit == "fluid ounce":
-            return float(self.value * self.FLUID_OUNCE_TO_ML), "milliliters"
-        elif self.unit == "cup":
-            return float(self.value * self.CUP_TO_ML), "milliliters"
-        elif self.unit == "liquid pint":
-            return float(self.value * self.LIQUID_PINT_TO_ML), "milliliters"
-        elif self.unit == "quart":
-            return float(self.value * self.QUART_TO_ML), "milliliters"
-        elif self.unit == "liquid gallon":
-            return float(self.value * self.LIQUID_GALLON_TO_L), "liters"
+        if self._unit == "fluid ounce":
+            return float(self._value * self.FLUID_OUNCE_TO_ML), "milliliters"
+        elif self._unit == "cup":
+            return float(self._value * self.CUP_TO_ML), "milliliters"
+        elif self._unit == "liquid pint":
+            return float(self._value * self.LIQUID_PINT_TO_ML), "milliliters"
+        elif self._unit == "quart":
+            return float(self._value * self.QUART_TO_ML), "milliliters"
+        elif self._unit == "liquid gallon":
+            return float(self._value * self.LIQUID_GALLON_TO_L), "liters"
         else:
-            raise ValueError(f"Unit {self.unit} is not supported.")
+            raise ValueError(f"Unit {self._unit} is not supported.")
     
     def __str__(self) -> str:
         '''Display the output'''
@@ -173,16 +173,16 @@ class Capacity:
         metric_value, label = self.to_metric()
 
         # Handle singular/plural for non-metric
-        display_unit = self.unit
-        if self.value != 1:
-            if not self.unit.endswith("s"):
+        display_unit = self._unit
+        if self._value != 1:
+            if not self._unit.endswith("s"):
                 display_unit += "s"
         
         # Handle singular/plural for metric
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
+        return f"{self._value} {display_unit} is {metric_value:.2f} {label}"
 
 class Mass:
     # Conversion constants
@@ -192,21 +192,21 @@ class Mass:
     TON_TO_KG = 1000
 
     def __init__(self, value: float | int, unit: str = "ounce"):
-        self.value = value
-        self.unit = unit.lower().rstrip("s")
+        self._value = value
+        self._unit = unit.lower().rstrip("s")
     
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
-        if self.unit == "ounce":
-            return float(self.value * self.OUNCE_TO_G), "grams"
-        elif self.unit == "pound":
-            return float(self.value * self.POUND_TO_KG), "kilograms"
-        elif self.unit == "stone":
-            return float(self.value * self.STONE_TO_KG), "kilograms"
-        elif self.unit == "ton":
-            return float(self.value * self.TON_TO_KG), "kilograms"
+        if self._unit == "ounce":
+            return float(self._value * self.OUNCE_TO_G), "grams"
+        elif self._unit == "pound":
+            return float(self._value * self.POUND_TO_KG), "kilograms"
+        elif self._unit == "stone":
+            return float(self._value * self.STONE_TO_KG), "kilograms"
+        elif self._unit == "ton":
+            return float(self._value * self.TON_TO_KG), "kilograms"
         else:
-            raise ValueError(f"Unit {self.unit} is not supported.")
+            raise ValueError(f"Unit {self._unit} is not supported.")
     
     def __str__(self) -> str:
         '''Display the output'''
@@ -214,34 +214,34 @@ class Mass:
         metric_value, label = self.to_metric()
 
         # Handle singular/plural for non-metric
-        display_unit = self.unit
-        if self.value != 1:
-            if not self.unit.endswith("s"):
+        display_unit = self._unit
+        if self._value != 1:
+            if not self._unit.endswith("s"):
                 display_unit += "s"
         
         # Handle singular/plural for metric
         if metric_value == 1:
             label = label.rstrip("s")
         
-        return f"{self.value} {display_unit} is {metric_value:.2f} {label}"
+        return f"{self._value} {display_unit} is {metric_value:.2f} {label}"
 
 class Temperature:
     def __init__(self, value: float | int, unit: str = "fahrenheit"):
-        self.value = value
-        self.unit = unit.lower()
+        self._value = value
+        self._unit = unit.lower()
     
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
-        if self.unit == "fahrenheit":
-            return float(((self.value - 32) / 1.8) + 273.15), "kelvin"
-        elif self.unit == "celsius":
-            return float(self.value + 273.15), "kelvin"
+        if self._unit == "fahrenheit":
+            return float(((self._value - 32) / 1.8) + 273.15), "kelvin"
+        elif self._unit == "celsius":
+            return float(self._value + 273.15), "kelvin"
         else:
-            raise ValueError(f"Unit {self.unit} is not supported.")
+            raise ValueError(f"Unit {self._unit} is not supported.")
     
     def __str__(self) -> str:
         '''Display the output'''
         # Get the metric value and label
         metric_value, label = self.to_metric()
 
-        return f"{self.value} {self.unit} is {metric_value:.2f} {label}"
+        return f"{self._value} {self._unit} is {metric_value:.2f} {label}"
