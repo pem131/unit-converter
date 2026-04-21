@@ -12,13 +12,13 @@ class Distance:
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
         if self._unit == "inch":
-            return float(self._value * self.INCH_TO_CM), "centimeters"
+            return round(float(self._value * self.INCH_TO_CM), 2), "centimeters"
         elif self._unit in ["foot", "feet"]:
-            return float(self._value * self.FOOT_TO_CM), "centimeters"
+            return round(float(self._value * self.FOOT_TO_CM), 2), "centimeters"
         elif self._unit == "yard":
-            return float(self._value * self.YARD_TO_CM), "centimeters"
+            return round(float(self._value * self.YARD_TO_CM), 2), "centimeters"
         elif self._unit == "mile":
-            return (self._value * self.MILE_TO_KM), "kilometers"
+            return round((self._value * self.MILE_TO_KM), 2), "kilometers"
         else:
             raise ValueError(f"Unit {self._unit} is not supported.")
     
@@ -57,15 +57,15 @@ class Area:
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
         if self._unit == "square inch":
-            return float(self._value * self.SQUARE_INCH_TO_SQUARE_CM), "square centimeters"
+            return round(float(self._value * self.SQUARE_INCH_TO_SQUARE_CM),2), "square centimeters"
         elif self._unit in ["square foot", "square feet"]:
-            return float(self._value * self.SQUARE_FOOT_TO_SQUARE_CM), "square centimeters"
+            return round(float(self._value * self.SQUARE_FOOT_TO_SQUARE_CM), 2), "square centimeters"
         elif self._unit == "square yard":
-            return float(self._value * self.SQUARE_YARD_TO_SQUARE_M), "square meters"
+            return round(float(self._value * self.SQUARE_YARD_TO_SQUARE_M), 2), "square meters"
         elif self._unit == "acre":
-            return float(self._value * self.ACRE_TO_SQUARE_M), "square meters"
+            return round(float(self._value * self.ACRE_TO_SQUARE_M), 2), "square meters"
         elif self._unit == "square mile":
-            return float(self._value * self.SQUARE_MILE_TO_SQUARE_KM), "square kilometers"
+            return round(float(self._value * self.SQUARE_MILE_TO_SQUARE_KM), 2), "square kilometers"
         else:
             raise ValueError(f"Unit {self._unit} is not supported.")
     
@@ -107,11 +107,11 @@ class Volume:
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
         if self._unit == "cubic inch":
-            return float(self._value * self.CUBIC_INCH_TO_CUBIC_CM), "cubic centimeters"
+            return round(float(self._value * self.CUBIC_INCH_TO_CUBIC_CM), 2), "cubic centimeters"
         elif self._unit in ["cubic foot", "cubic feet"]:
-            return float(self._value * self.CUBIC_FOOT_TO_CUBIC_CM), "cubic centimeters"
+            return round(float(self._value * self.CUBIC_FOOT_TO_CUBIC_CM), 2), "cubic centimeters"
         elif self._unit == "cubic yard":
-            return float(self._value * self.CUBIC_YARD_TO_CUBIC_CM), "cubic centimeters"
+            return round(float(self._value * self.CUBIC_YARD_TO_CUBIC_CM), 2), "cubic centimeters"
         else:
             raise ValueError(f"Unit {self._unit} is not supported.")
     
@@ -155,15 +155,15 @@ class Capacity:
     def to_metric(self) -> tuple[float. str]:
         '''Returns a tuple (value, label)'''
         if self._unit == "fluid ounce":
-            return float(self._value * self.FLUID_OUNCE_TO_ML), "milliliters"
+            return round(float(self._value * self.FLUID_OUNCE_TO_ML), 2), "milliliters"
         elif self._unit == "cup":
-            return float(self._value * self.CUP_TO_ML), "milliliters"
+            return round(float(self._value * self.CUP_TO_ML), 2), "milliliters"
         elif self._unit == "liquid pint":
-            return float(self._value * self.LIQUID_PINT_TO_ML), "milliliters"
+            return round(float(self._value * self.LIQUID_PINT_TO_ML), 2), "milliliters"
         elif self._unit == "quart":
-            return float(self._value * self.QUART_TO_ML), "milliliters"
+            return round(float(self._value * self.QUART_TO_ML), 2), "milliliters"
         elif self._unit == "liquid gallon":
-            return float(self._value * self.LIQUID_GALLON_TO_L), "liters"
+            return round(float(self._value * self.LIQUID_GALLON_TO_L), 2), "liters"
         else:
             raise ValueError(f"Unit {self._unit} is not supported.")
     
@@ -198,13 +198,13 @@ class Mass:
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
         if self._unit == "ounce":
-            return float(self._value * self.OUNCE_TO_G), "grams"
+            return round(float(self._value * self.OUNCE_TO_G), 2), "grams"
         elif self._unit == "pound":
-            return float(self._value * self.POUND_TO_KG), "kilograms"
+            return round(float(self._value * self.POUND_TO_KG), 2), "kilograms"
         elif self._unit == "stone":
-            return float(self._value * self.STONE_TO_KG), "kilograms"
+            return round(float(self._value * self.STONE_TO_KG), 2), "kilograms"
         elif self._unit == "ton":
-            return float(self._value * self.TON_TO_KG), "kilograms"
+            return round(float(self._value * self.TON_TO_KG), 2), "kilograms"
         else:
             raise ValueError(f"Unit {self._unit} is not supported.")
     
@@ -233,9 +233,9 @@ class Temperature:
     def to_metric(self) -> tuple[float, str]:
         '''Returns a tuple (value, label)'''
         if self._unit == "fahrenheit":
-            return float(((self._value - 32) / 1.8) + 273.15), "kelvin"
+            return round(float(((self._value - 32) / 1.8) + 273.15), 2), "kelvin"
         elif self._unit == "celsius":
-            return float(self._value + 273.15), "kelvin"
+            return round(float(self._value + 273.15), 2), "kelvin"
         else:
             raise ValueError(f"Unit {self._unit} is not supported.")
     
