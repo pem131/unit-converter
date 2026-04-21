@@ -1,6 +1,6 @@
 import argparse
 import unit_conversion as uc
-from helper_functions import perform_conversion, print_supported_units
+from helper_functions import perform_conversion, print_supported_units, save_to_csv
 
 def main():
     # Instantiate a parser
@@ -25,9 +25,20 @@ def main():
     conversion_classes = [uc.Area, uc.Capacity, uc.Distance, uc.Mass, uc.Temperature, uc.Volume]
 
     if args.interactive:
+        # Ask if user want to save conversion to a csv file
+        ask_save = input("Do you want to save the conversions to a csv file? ('y' or 'n')? ").lower().strip()
+        # Only accept 'y' or 'n'
+        while ask_save not in ["y", "n"]:
+            ask_save = input("Please enter 'y' for yes or 'n' for no: ").lower().strip()
+        
+        # Convert save answer to bool (True/False)
+        yes_to_save = (ask_save.lower().strip() == "y")
+        
         print("Entering interactive mode (type 'quit' to exit)")
+
         # Create a while loop
         while True:
+            # Take user input    
             cmd = input("Input a value and a unit (E.g., 3 feet) ").strip()
             # Create an exit for the loop
             if cmd.lower() == "quit":
@@ -45,12 +56,18 @@ def main():
                 # Collect the unit
                 unit = " ".join(parts_input[1:])
                 # Perform the conversion
-                perform_conversion(value=val, unit=unit, conversion_classes=conversion_classes)
+                met_val, met_unit = perform_conversion(value=val, unit=unit, conversion_classes=conversion_classes)
+
+                # Evaluate if the conversions should be saved to a csv file
+                if yes_to_save:
+                    save_to_csv(start_value=val, start_unit=unit, final_value=met_val, final_unit=met_unit)
+                    print("Saved to conversion_results.csv")
 
             except ValueError as e:
                 # Only runs if float conversion fails
                 print(e)
                 continue
+
 
     elif args.show:
         print_supported_units()
