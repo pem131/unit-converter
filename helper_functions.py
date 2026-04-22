@@ -1,6 +1,5 @@
 import csv
 import os
-from typing import TextIO
 
 def perform_conversion(value: float, unit: str, conversion_classes: list[type]) -> tuple[float, str]:
     '''Returns the metric value after conversion or an ValueError if the unit is not supported'''
@@ -45,7 +44,6 @@ def save_to_csv(start_value: float, start_unit: str, final_value: float, final_u
         
         # Add to file if it exist
         writer.writerow(data)
-
 
 def print_supported_units() -> None:
     '''Prints the supported conversions'''
