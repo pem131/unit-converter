@@ -2,7 +2,7 @@
 A command line tool to convert US customary units to metric units.
 
 ## Features
-* **Dual modes:** Supports both single-command conversion and a persistent interactive mode.
+* **Dual modes:** Supports both single-command conversion and a persistent interactive mode with optional CSV data logging.
 * **Smart parsing:** Handles multi-word units and units in both singular and plural.
 * **Error Handling:** Manages invalid numbers and unsupported units.
 * **Extensible:** Built with an Object-Oriented approach for easy addition of new units.

@@ -24,7 +24,7 @@ def perform_conversion(value: float, unit: str, conversion_classes: list[type]) 
     
     raise ValueError(f"Unit {unit} is not supported.")
 
-def save_to_csv(start_value: float, start_unit: str, final_value: float, final_unit: str) -> TextIO:
+def save_to_csv(start_value: float, start_unit: str, final_value: float, final_unit: str) -> None:
     '''Writes the values and units before and after conversion to a csv file'''
     # Define file name
     file_name = "conversion_results.csv"
